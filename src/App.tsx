@@ -1,35 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  Admin,
+  Resource,
+  ListGuesser,
+  EditGuesser,
+  ShowGuesser,
+} from "react-admin";
+import { dataProvider } from "./dataProvider";
+import { UserList } from "./users";
+import { authProvider } from "./authProvider";
+import { PostCreate, PostEdit, PostList } from "./posts";
+import { ActivityList } from "./components/activity/activity";
+import { ActivityEdit } from "./components/activity/activity-edit";
+import { ActivityCreate } from "./components/activity/activity-create";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export const App = () => (
+  <Admin authProvider={authProvider} dataProvider={dataProvider}>
+    <Resource name='activity' list={ActivityList} edit={ActivityEdit} create={ActivityCreate} recordRepresentation="slug"/>
+    {/* <Resource name='users' show={ShowGuesser} recordRepresentation="name" list={UserList}/> */}
+    {/* <Resource name='posts' list={PostList} edit={PostEdit} create={PostCreate}/> */}
+  </Admin>)
