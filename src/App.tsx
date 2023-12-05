@@ -14,8 +14,11 @@ import { ActivityEdit } from "./components/activity/activity-edit";
 import { ActivityCreate } from "./components/activity/activity-create";
 
 export const App = () => (
-  <Admin authProvider={authProvider} dataProvider={dataProvider}>
+  <Admin 
+  authProvider={authProvider} 
+  dataProvider={dataProvider}>
     <Resource name='activity' list={ActivityList} edit={ActivityEdit} create={ActivityCreate} recordRepresentation="slug"/>
+    <Resource name='event' list={ListGuesser}/>
     {/* <Resource name='users' show={ShowGuesser} recordRepresentation="name" list={UserList}/> */}
     {/* <Resource name='posts' list={PostList} edit={PostEdit} create={PostCreate}/> */}
   </Admin>)

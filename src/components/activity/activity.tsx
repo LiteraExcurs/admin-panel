@@ -16,8 +16,10 @@ export const ActivityList = () => {
                 <TextField source="id" />
                 <TextField source="name" />
                 <TextField source="type" />
-                <TextField source="location" />
                 <TextField source="slug" />
+                <TextField source="subtitle" />
+                <TextField source="season" />
+                <TextField source="location" />
                 <TextField source="description" />
                 <TextField source="image" />
                 <BooleanField source="isActive" />
