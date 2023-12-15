@@ -1,10 +1,28 @@
-import { BooleanField, Datagrid, List, SimpleList, TextField } from 'react-admin';
+import { BooleanField, Datagrid, ImageField, List, SimpleList, TextField, useRecordContext } from 'react-admin';
 import { useMediaQuery, Theme } from "@mui/material";
+import { StyledEngineProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+
+
+export default function StyledComponentsDeep({...props}) {
+  return (
+    <Box sx={{ maxHeight: 100, overflow: 'hidden' }}>
+      <TextField {...props} />
+    </Box>
+  );
+}
 
 export const ActivityList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
-
-    return (<List>
+    const CustomField = () => {
+        const record = useRecordContext();
+        return (
+            <span>
+                {record.events.length}
+            </span >
+        )
+    };
+    return (<List title='Мероприятия'>
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.name}
@@ -13,16 +31,20 @@ export const ActivityList = () => {
                 />
             ) : (
             <Datagrid rowClick="edit">
-                <TextField source="id" />
-                <TextField source="name" />
-                <TextField source="type" />
-                <TextField source="slug" />
-                <TextField source="subtitle" />
-                <TextField source="season" />
-                <TextField source="location" />
-                <TextField source="description" />
-                <TextField source="image" />
-                <BooleanField source="isActive" />
+                <TextField source="id" label='№'/>
+                <TextField source="name" label='Название'/>
+                <TextField source="subtitle" label='Подзаголовок'/>
+                <TextField source="season" label='Сезон'/>
+                <TextField source="type" label='Тип'/>
+                <TextField source="location" label='Локация'/>
+                <StyledComponentsDeep source="description" label='Описание'/>
+                <TextField source="slug" label='Ссылка'/>
+                <StyledEngineProvider injectFirst>
+                    <ImageField source="image" label='Изображение'/>
+                </StyledEngineProvider>
+                <BooleanField source="isActive" label='Активно'/>
+                <BooleanField source="isDeleted" label='Удалено'/>
+                <CustomField label='Событий'/>
             </Datagrid>)}
     </List>
 )};

@@ -31,13 +31,13 @@ export const authProvider: AuthProvider = {
     },
     // called when the user clicks on the logout button
     logout: () => {
-        //localStorage.removeItem('login');
+        localStorage.removeItem('login');
         return Promise.resolve();
     },
     // called when the API returns an error
     checkError: ({ status }: { status: number }) => {
         if (status === 401 || status === 403) {
-            // localStorage.removeItem('login');
+            localStorage.removeItem('login');
             return Promise.reject();
         }
         return Promise.resolve();
