@@ -9,7 +9,7 @@ const CustomField = () => {
     const record = useRecordContext();
     return (
         <span>
-            {record.booked.reduce((acc, item) => acc + item.visitors, 0)}
+            {record.booked.reduce((acc: number, item: any) => acc + item.visitors, 0)}
         </span >
     )
 };
